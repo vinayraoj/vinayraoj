@@ -1,0 +1,13 @@
+# Installing Packages 
+install.packages("dplyr")
+
+#Loading lLibraries 
+library(dplyr)
+
+#Redaing a .csv file 
+df<-"c:/folder name/file name.CSV"
+df<-read.csv(df)
+
+#Writing a .csv file
+write.csv(df, file="c:/folder name/file name.CSV")
+
