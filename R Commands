@@ -10,7 +10,7 @@ write.csv(df, file="c:/folder name/file name.CSV")     #Writing a .csv file
 df<-select(df, col1, col2, col3, col7)                 #Select 
 df<-select(df, 1:3, 7)
 
-df$col1[is.na(df$col1)]<-df[is.na(df$col2)
+df$col1[is.na(df$col1)]<-df[is.na(df$col1), c("col2")
                                                          , c("Source")]
 
 df<- unique(df)                                        #Removing duplicate entries
