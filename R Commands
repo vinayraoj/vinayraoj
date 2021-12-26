@@ -52,6 +52,19 @@ df2<-df1 %>%                                                                  #C
 
 sum(is.na(col1))                                                              #Count NA Values
 
+for(i in 1:nrow(df)){                                                         # Iterating through rows 
+  if(df$Key[i]==df$Key1[i+1] & df$col1[i]==df$col1[i+1]){
+    df$col2[i]="True"
+  }else {
+    df$col2[i]="False"
+  }
+}
 
+df<-mutate(df, col1=lag(col1))                                                #Shifting rows below by one 
 
+df$Date.Format<-format(as.Date(df$Date.Format, format="%d-%m-%Y"),"%Y#%m")    #Formating Date 
+
+df<-arrange(df, Key, col1)                                                    #Sorting in Assending Order
+
+df<-arrange(df, desc(Key, col1))                                              #Sorting in Descending Order
 
