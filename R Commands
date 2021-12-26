@@ -17,5 +17,10 @@ df<-mutate(df, col.x=" ")                              #Adding a New Column
 df<-mutate(df, Key=paste("col1", "col2", sep="#")      #Creating a Key
 df<-select(df, Key, everything())
 
-df1<-left_join(df1, select(df2, c("Key2", "col1", "col2"), by=c("Key1" = "Key2")
+df1<-left_join(df1, select(df2, c("Key2", "col1", "col2"), by=c("Key1" = "Key2")        #VLook Up
 
+target<-c("x", "y")                                                                     #Filtering based on condition 
+df<-filter(df, col1%in% target)
+
+H2<-summarise(group_by(H2_SKU_CFA,Key4),Weekly.SDFE.H2=sd(Weekly.Forecast.Error, na.rm = TRUE),
+              Avg.Weekly.Forecast.H2= mean(Weekly.Forecast, na.rm = TRUE))%>%ungroup()
