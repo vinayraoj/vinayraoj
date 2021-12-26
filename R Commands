@@ -7,8 +7,15 @@ df<-read.csv(df)
 
 write.csv(df, file="c:/folder name/file name.CSV")     #Writing a .csv file
 
+nrow(df)                                               #Count number. of rows
+ncol(df)                                               #Count number. of columns
+
+dim(df)                                                #Count rows, columns together
+
 df<-select(df, col1, col2, col3, col7)                 #Select 
 df<-select(df, 1:3, 7)
+
+df$col1[10]<-9999                                      #Changing a value of a particular row of a column
 
 df$col1[is.na(df$col1)]<-df[is.na(df$col1), c("col2")  #Replacing Missing Values 
 
@@ -32,11 +39,19 @@ df1<-left_join(df1, select(df2, c("Key2", "col1", "col2"),                    #V
 target<-c("x", "y")                                                           #Filtering based on condition 
 df<-filter(df, col1%in% target)
 
-df1<-summarise(group_by(df,Key),col.x=sum(col1, na.rm = TRUE),                #Summarize and groupby based on condition, save in new data frame as number entries reduces
+df1<-summarise(group_by(df,Key),col.x=sum(col1, na.rm = TRUE),                #Summarise and group_by based on condition, save in new data frame as number entries reduces
                                 col.y=mean(col2, na.rm = TRUE),
                                 col.z=sd(col3, na.rm = TRUE))%>%ungroup()
 
-
-
-df<-mutate(df, col.x=ifelse(col1== "x", 
+df<-mutate(df, col.x=ifelse(col1== "x",                                       #if_else in dplyr
                           col.x<-col1, col.x<-col2))
+
+df2<-df1 %>%                                                                  #Count if
+  group_by(Key) %>% 
+  summarize(col1 = n())
+
+sum(is.na(col1))                                                              #Count NA Values
+
+
+
+
