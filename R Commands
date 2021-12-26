@@ -12,3 +12,4 @@ df<-read.csv(df)
 write.csv(df, file="c:/folder name/file name.CSV")
 
 
+
