@@ -10,6 +10,9 @@ write.csv(df, file="c:/folder name/file name.CSV")     #Writing a .csv file
 df<-select(df, col1, col2, col3, col7)                 #Select 
 df<-select(df, 1:3, 7)
 
+df$col1[is.na(df$col1)]<-df[is.na(df$col2)
+                                                         , c("Source")]
+
 df<- unique(df)                                        #Removing duplicate entries
 
 df<-mutate(df, col.x=" ")                              #Adding a New Column
@@ -17,10 +20,14 @@ df<-mutate(df, col.x=" ")                              #Adding a New Column
 df<-mutate(df, Key=paste("col1", "col2", sep="#")      #Creating a Key
 df<-select(df, Key, everything())
 
-df1<-left_join(df1, select(df2, c("Key2", "col1", "col2"), by=c("Key1" = "Key2")        #VLook Up
+df1<-left_join(df1, select(df2, c("Key2", "col1", "col2"),                    #VLook Up
+                                by=c("Key1" = "Key2")        
 
-target<-c("x", "y")                                                                     #Filtering based on condition 
+target<-c("x", "y")                                                           #Filtering based on condition 
 df<-filter(df, col1%in% target)
 
-H2<-summarise(group_by(H2_SKU_CFA,Key4),Weekly.SDFE.H2=sd(Weekly.Forecast.Error, na.rm = TRUE),
-              Avg.Weekly.Forecast.H2= mean(Weekly.Forecast, na.rm = TRUE))%>%ungroup()
+df1<-summarise(group_by(df,Key),col.x=sum(col1, na.rm = TRUE),                #Summarize and groupby based on condition, save in new data frame as number entries reduces
+                               col.y=mean(col2, na.rm = TRUE),
+                               col.z=sd(col3, na.rm = TRUE))%>%ungroup()
+
+
